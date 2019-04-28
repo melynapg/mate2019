@@ -42,21 +42,20 @@ public class Complejos {
        
 
    public Complejos(float modulo, float argumento) {
-        this.aBinomica();
+        this.aBinomica(modulo , argumento);
     }
     
     public Complejos(double pReal, double pImaginaria) {
-         this.aFasorial();
+         this.transformarAPolar();
         
     }
 
-    public void aBinomica(){
-        double phi = Math.toRadians(argumento);
-        this.pReal = (float) (modulo* Math.cos(phi));
-        this.pImaginaria = (float) (modulo* Math.sin(phi));}
+    public void aBinomica(float modulo , float argumento){
+        this.pReal = (float) (modulo* Math.cos(argumento));
+        this.pImaginaria = (float) (modulo* Math.sin(argumento));}
    
 
-    public void aFasorial(){
+    public void transformarAPolar(){
     	
     	float dosPhi = 360;
     	float dosphiRad = (float)Math.toRadians(dosPhi);
@@ -64,9 +63,8 @@ public class Complejos {
                Math.pow(this.pImaginaria, 2)));
       
          float argumentoGrado =   (float) 
-      Math.toDegrees(Math.atan2(this.pImaginaria, this.pReal));
-    		//   Math.atan2(this.pImaginaria, this.pReal)
-         
+           Math.toDegrees(Math.atan2(this.pImaginaria, this.pReal));
+    		
 
          float argumentoRadianes =   (float) Math.toRadians(argumentoGrado);
          
@@ -74,13 +72,66 @@ public class Complejos {
     	
     	this.argumento = dosphiRad + argumentoRadianes;
     	 
-        	
-    }else 
-    {
+     }else  {
     	this.argumento = argumentoRadianes;
     }
 }
     
+    public Complejos sumaBinario(Complejos z1 , Complejos z2) {
+    	
+    	Complejos resultado = new Complejos(pReal, pImaginaria);
+    	
+    	resultado.pReal= z1.pReal + z2.pImaginaria;
+    	resultado.pImaginaria = z1.pImaginaria +z2.pImaginaria; 
+    	
+    	
+    	return resultado;
+    	
+    	
+    }
+    
+    public Complejos multiplicarPolar (Complejos z1 , Complejos z2 ) {
+    	
+    	Complejos resultado = new Complejos(modulo,argumento);
+    	
+    	resultado.modulo = z1.modulo * z2.modulo;
+    	resultado.argumento= z1.argumento +z2.argumento;
+    	
+    	return resultado;
+    	
+    	
+    	
+    }
+    
+    public Complejos dividirPolar (Complejos z1 , Complejos z2) {
+    
+    	Complejos resultado = new Complejos(modulo, argumento);
+    	
+    	resultado.modulo = z1.modulo/z2.modulo;
+    	resultado.argumento = z1.argumento - z2.argumento;
+    	
+    	return resultado;
+    }
+    
+    /*public Complejos potenciaPolar (Complejos z1 , int i) {
+    	
+    	Integer potencia = 1;
+    	
+    	for(int i = 0; i<i ;i++) {
+    		potencia * = z1.modulo;
+    	}
+    	
+    }
+    
+    public static Integer potencia(Integer a, Integer b){
+    	Integer potencia = 1;
+    	for(int i = 0; i<b;i++){
+    	potencia *= a;
+    	}
+    	return potencia;
+    	}*/
+    
+   
 }
     
     

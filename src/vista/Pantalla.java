@@ -33,6 +33,9 @@ public class Pantalla extends javax.swing.JFrame  {
 	public CalculosControlador calculosControlador = new CalculosControlador();
 	private Complejos z; 
 	private JTextField resultadoPolar;
+	private JTextField modulo;
+	private JTextField argumento;
+	private JTextField resultadoZ2Binomica;
 	
 	
 	
@@ -90,8 +93,8 @@ public class Pantalla extends javax.swing.JFrame  {
 	
 		
 		JButton btnTransformar = new javax.swing.JButton("Transformar");
-		btnTransformar.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnTransformar.setBackground(new Color(102, 205, 170));
+		btnTransformar.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnTransformar.setBackground(new Color(60, 179, 113));
 		btnTransformar.setBounds(403, 14, 149, 23);
 		btnTransformar.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -102,9 +105,9 @@ public class Pantalla extends javax.swing.JFrame  {
 			 Boolean validar = calculosControlador.validarBtnTransformar(pReal.getText(), pImg.getText());
 			 
 			 if (validar ) {
-				 z= calculosControlador.setBinomicaValues( pReal.getText(), pImg.getText());
+			    z= calculosControlador.setBinomicaValues( pReal.getText(), pImg.getText());
 			 	calculosControlador.imprimeBinomica(z, resultadoBinomica);
-				calculosControlador.imprimePolar(z, resultadoPolar);
+				calculosControlador.imprimeDeBinomicaPolar(z, resultadoPolar);
 				
 			 } 
 			 else 
@@ -175,12 +178,66 @@ public class Pantalla extends javax.swing.JFrame  {
 				resultadoPolar.setText("");
 				pReal.setText("");
 				pImg.setText("");
+				resultadoZ2Binomica.setText("");
+				modulo.setText("");
+				argumento.setText("");
+
 				
 			}
 			
 		});
 		btnLimpiar.setBounds(42, 230, 132, 55);
 		frame.getContentPane().add(btnLimpiar);
+		
+		JLabel lblZ = new JLabel("Z2");
+		lblZ.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblZ.setBounds(29, 133, 46, 14);
+		frame.getContentPane().add(lblZ);
+		
+		JLabel lblModulo = new JLabel("modulo");
+		lblModulo.setBounds(112, 135, 46, 14);
+		frame.getContentPane().add(lblModulo);
+		
+		modulo = new JTextField();
+		modulo.setBounds(177, 131, 46, 22);
+		frame.getContentPane().add(modulo);
+		modulo.setColumns(10);
+		
+		JLabel lblArgumento = new JLabel("argumento");
+		lblArgumento.setBounds(233, 135, 70, 14);
+		frame.getContentPane().add(lblArgumento);
+		
+		argumento = new JTextField();
+		argumento.setBounds(327, 132, 46, 20);
+		frame.getContentPane().add(argumento);
+		argumento.setColumns(10);
+		
+		JButton btnNewButton = new JButton("Transformar");
+		btnNewButton.setBackground(new Color(60, 179, 113));
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+		 Complejos zp = new Complejos(0, 0);
+		 
+		    z = calculosControlador.setPolarValues(modulo.getText() , argumento.getText());
+		 	calculosControlador.imprimeBinomicaDesdePolar(z, resultadoZ2Binomica);		
+		
+		
+			}
+		});
+		btnNewButton.setBounds(403, 131, 149, 23);
+		frame.getContentPane().add(btnNewButton);
+		
+		resultadoZ2Binomica = new JTextField();
+		resultadoZ2Binomica.setEnabled(false);
+		resultadoZ2Binomica.setBackground(Color.DARK_GRAY);
+		resultadoZ2Binomica.setBounds(151, 164, 106, 20);
+		frame.getContentPane().add(resultadoZ2Binomica);
+		resultadoZ2Binomica.setColumns(10);
+		
+		JLabel lblFormaBinomica_1 = new JLabel("Forma binomica");
+		lblFormaBinomica_1.setBounds(10, 167, 131, 14);
+		frame.getContentPane().add(lblFormaBinomica_1);
 		
 	
 		
